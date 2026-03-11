@@ -1,25 +1,71 @@
-console.log("Hello from script.js ⚡️")
+//! Scope
+console.log("❌ Utanför kodblocket:")
+const x = "1 const 🔥"
+console.log("första:", x)
 
-//Let Får ändra data
-let teacher = "Johan"
-let age = 44
-let courseStarted = true
+{
+    const x = "2 const 🌊"
+    let y = "let"
+    var z = "var"
 
-//Const Får inte ändra data
-const courseLengthWeeks = 20
+    console.log("✅ Inne i kodblocket:")
+    console.log("andra:", x)
+    // console.log(y)
+    // console.log(z)
+}
 
-console.log("Lärare i kursen", teacher)
+console.log("❌ Utanför kodblocket:")
+console.log("tredje", x)
+//console.log(y)
+// console.log(z)
 
-teacher = "stefan"
+//! Hoisting 🏗️
+varTest = "ny hoistad var 🏗️😵‍💫"
 
-console.log("Lärare i kursen", teacher)
+console.log(varTest)
 
-console.log("teacter datatyp ?" + typeof teacher)
-console.log("age datatyp ?" + typeof age)
-console.log("course started datatyp ?" + typeof courseStarted)
+var varTest = "hoistad var 🏗️"
 
-const user = "johan"
+console.log(varTest)
 
-console.log("user:", teacher, "datatyp:", typeof teacher)
+//! UNDEFINED & NULL
+let undefinedUser
 
-//Datatyper: number, string, boolean
+console.log(undefinedUser, typeof undefinedUser)
+
+let nullUser = null
+
+console.log(nullUser, typeof nullUser)
+
+//! Intro till Arrayer
+
+const array = ["banan", "kiwi", "melon", "apelsin", 1, false, 5]
+
+console.log(typeof array[1])
+
+console.log("Det finns:", array.length, "produkter på sidan")
+
+//! Intro Objects
+
+const teacher = {
+    user: "johan",
+    role: "teacher",
+    age: 44,
+}
+
+console.log("Teacher:", teacher.user)
+
+const teachers = [
+    {
+        user: "Johan",
+        role: "teacher",
+        age: 44,
+    },
+    {
+        user: "Pelle",
+        role: "teacher",
+        age: 32,
+    },
+]
+
+console.log(teachers)
