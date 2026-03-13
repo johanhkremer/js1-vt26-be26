@@ -59,12 +59,24 @@ if (isMember || hasCoupon) {
     console.log("Du får ingen rabatt! ❌")
 }
 
-//! ! logical not
+//! ! = logical not
+if (!isMember) {
+    console.log("Du är inte medlem")
+} else {
+    console.log("Du är medlem")
+}
 
+//! + kan både addera tal och konkatenera strängar i JavaScript.
+//!
+//! number + number → addition
+//! string + string → konkatenering
+//! string + number → number konverteras till string och konkateneras
+//!
+//! Andra matematiska operatorer (-, *, /) fungerar bara matematiskt.
 
 console.log(5 + 5)
 
-console.log(5 + "5", "☀️")
+console.log(5 + "5")
 
 console.log(5 - 3)
 
