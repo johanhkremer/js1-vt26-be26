@@ -38,7 +38,7 @@ if (age >= 18) {
     console.log("❌ Du är inte myndig")
 }
 
-//! &&, ||
+//! && OCH, || ELLER
 
 const hasPassword = true
 const isAdmin = true
