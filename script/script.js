@@ -11,14 +11,15 @@
 
 //Inte DRY, väldigt upprapande
 
-//! for loop 
-//! (loop variabel, villkor, uppdatering) {}
+//!for loop (Används oftast när du redan vet ungefär hur många gånger något ska köras.)
+
+//! (loop variabel, villkor, uppdatering) {Gör någonting}
 
 for (let i = 1; i <= 10; i++) {
     console.log("🔁 for loop", i)
 }
 
-//! While loop
+//!while loop (Används när du vill köra så länge ett villkor är sant, men du inte nödvändigtvis vet i förväg hur många varv det blir.)
 
 let i = 0
 
@@ -36,7 +37,7 @@ while (i <= 10) {
     i++
 }
 
-//! do-while
+//!do-while loop (Fungerar nästan som while, men den kör alltid minst en gång eftersom villkoret kollas efteråt.)
 
 let number = 0
 
