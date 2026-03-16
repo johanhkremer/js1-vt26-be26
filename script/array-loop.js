@@ -46,3 +46,38 @@ for (let i = 0; i < students.length; i++) {
         console.log(students[i].name, " studerar react! ⚛️")
     }
 }
+
+const student = {
+    id: 1,
+    name: "Alice",
+    age: 23,
+    active: true,
+    course: "JavaScript"
+}
+
+//for-in loop
+for (let key in student) {
+    console.log(key, student[key])
+}
+
+//for-of loop
+for (let fruit of fruits) {
+    console.log("🔥", fruit)
+}
+
+//Break and Continue
+for (let i = 0; i < students.length; i++) {
+    const student = students[i]
+
+    //! ! logical not
+    if (!student.active) {
+        console.log(`❌ Hoppar över ${student.name} eftersom studenten inte är aktiv`)
+        continue
+    }
+
+    if (student.course === "React") {
+        console.log(`✋ Hittade första React-studenten: ${student.name}`)
+        break
+    }
+
+}
