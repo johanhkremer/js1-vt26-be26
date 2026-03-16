@@ -9,7 +9,7 @@
 // console.log(9)
 // console.log(10)
 
-//Inte DRY, väldigt upprapande
+//Inte DRY, väldigt upprepande
 
 //!for loop (Används oftast när du redan vet ungefär hur många gånger något ska köras.)
 
