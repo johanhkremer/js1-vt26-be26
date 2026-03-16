@@ -51,10 +51,15 @@ while (number <= 10)
 //! Operator %
 //Operatorn % ger resten efter en division.
 
-console.log(10 % 2)
+console.log("10 % 2 = ", 10 % 2)
+console.log("9 % 2 = ", 9 % 2)
 
 for (let i = 0; i <= 20; i++) {
+    if (i === 0) {
+        console.log("Endast jämna tal")
+    }
+
     if (i % 2 === 0) {
-        console.log(i, "🔥")
+        console.log(i)
     }
 }
