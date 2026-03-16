@@ -1,71 +1,59 @@
-//! Scope
-console.log("❌ Utanför kodblocket:")
-const x = "1 const 🔥"
-console.log("första:", x)
+// console.log(1)
+// console.log(2)
+// console.log(3)
+// console.log(4)
+// console.log(5)
+// console.log(6)
+// console.log(7)
+// console.log(8)
+// console.log(9)
+// console.log(10)
 
-{
-    const x = "2 const 🌊"
-    let y = "let"
-    var z = "var"
+//Inte DRY, väldigt upprapande
 
-    console.log("✅ Inne i kodblocket:")
-    console.log("andra:", x)
-    // console.log(y)
-    // console.log(z)
+//! for loop 
+//! (loop variabel, villkor, uppdatering) {}
+
+for (let i = 1; i <= 10; i++) {
+    console.log("🔁 for loop", i)
 }
 
-console.log("❌ Utanför kodblocket:")
-console.log("tredje", x)
-//console.log(y)
-// console.log(z)
+//! While loop
 
-//! Hoisting 🏗️
-varTest = "ny hoistad var 🏗️😵‍💫"
+let i = 0
 
-console.log(varTest)
+while (i <= 10) {
+    if (i <= 0) {
+        console.log("Starta räkningen!")
+    }
 
-var varTest = "hoistad var 🏗️"
+    console.log("🔁 while loop", i)
 
-console.log(varTest)
+    if (i >= 10) {
+        console.log("Räkning färdig!")
+    }
 
-//! UNDEFINED & NULL
-let undefinedUser
-
-console.log(undefinedUser, typeof undefinedUser)
-
-let nullUser = null
-
-console.log(nullUser, typeof nullUser)
-
-//! Intro till Arrayer
-
-const array = ["banan", "kiwi", "melon", "apelsin", 1, false, 5]
-
-console.log(typeof array[1])
-
-console.log("Det finns:", array.length, "produkter på sidan")
-
-//! Intro Objects
-
-const teacher = {
-    user: "johan",
-    role: "teacher",
-    age: 44,
+    i++
 }
 
-console.log("Teacher:", teacher.user)
+//! do-while
 
-const teachers = [
-    {
-        user: "Johan",
-        role: "teacher",
-        age: 44,
-    },
-    {
-        user: "Pelle",
-        role: "teacher",
-        age: 32,
-    },
-]
+let number = 0
 
-console.log(teachers)
+do {
+    console.log("🔁 do-while loop", number)
+    number++
+}
+
+while (number <= 10)
+
+//! Operator %
+//Operatorn % ger resten efter en division.
+
+console.log(10 % 2)
+
+for (let i = 0; i <= 20; i++) {
+    if (i % 2 === 0) {
+        console.log(i, "🔥")
+    }
+}
