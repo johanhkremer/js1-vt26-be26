@@ -39,3 +39,50 @@ if (matte) {
 
 /*  ! → vänder till motsatt boolean */
 
+/*
+? Functions
+*/
+
+console.log("Hej Ahmed!")
+console.log("Hej Lisa!")
+console.log("Hej Stina!")
+
+function basicFunction() {
+    console.log("Jag är en funktion 🔥")
+}
+
+basicFunction()
+basicFunction()
+basicFunction()
+
+//Paramenter = tar emot ett argument
+
+function greet(name) {
+    console.log(`Hej ${name}!`)
+}
+
+greet("Ahmed")
+greet("Lisa")
+greet("Johan ⚡️")
+greet(true)
+greet(42)
+
+//arrow-functions (modern)
+const arrowFunction = () => console.log("Hej från arrow 🏹")
+
+arrowFunction()
+
+
+// Block-scope
+let globalVarible = "Jag är global 🌏"
+
+function testScope() {
+    let localVarible = "Jag är lokal 📦"
+    console.log(globalVarible)
+    console.log(localVarible)
+}
+
+testScope()
+
+console.log(globalVarible)
+// console.log(localVarible)
