@@ -72,7 +72,6 @@ const arrowFunction = () => console.log("Hej från arrow 🏹")
 
 arrowFunction()
 
-
 // Block-scope
 let globalVariable = "Jag är global 🌏"
 
@@ -86,4 +85,47 @@ testScope()
 
 console.log(globalVariable)
 // console.log(localVarible)
+
+// Hoisting 🏗️
+
+hoisted()
+
+function hoisted() {
+    console.log("Jag är hoistad! 🏗️ 🔥")
+}
+
+// notHosited()
+
+const notHosited = function () {
+    console.log("Jag är inte hoistad! 🏗️ ❌")
+}
+
+notHosited()
+
+//RETURN
+
+const arrowReturn = (a, b) => {
+    return a + b
+}
+
+const answer = arrowReturn(100, 9)
+
+console.log(answer)
+
+
+// 🏗️ Hoisting const, let, var
+const johansConst = "const"
+
+// console.log(johansLet)
+
+let johansLet = "let"
+
+johansVar = "johan hositade var 🏗️"
+
+console.log(johansVar)
+
+var johansVar = "var"
+
+console.log(johansVar)
+
 
