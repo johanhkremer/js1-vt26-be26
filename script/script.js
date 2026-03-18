@@ -74,15 +74,16 @@ arrowFunction()
 
 
 // Block-scope
-let globalVarible = "Jag är global 🌏"
+let globalVariable = "Jag är global 🌏"
 
 function testScope() {
-    let localVarible = "Jag är lokal 📦"
-    console.log(globalVarible)
-    console.log(localVarible)
+    let localVariable = "Jag är lokal 📦"
+    console.log(globalVariable)
+    console.log(localVariable)
 }
 
 testScope()
 
-console.log(globalVarible)
+console.log(globalVariable)
 // console.log(localVarible)
+
