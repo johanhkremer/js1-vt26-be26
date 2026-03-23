@@ -1,131 +1,116 @@
-/*
-----------------------------------------------------------------
-? Falsy
-----------------------------------------------------------------
-Value	        Type	    Description
-null	        Null	    The keyword null — the absence of any value.
-undefined	    Undefined	undefined — the primitive value.
-false	        Boolean	    The keyword false.
-NaN	            Number	    Not a Number (represents an invalid or undefined result from a calculation.)
-0	            Number	    The Number zero, also including 0.0, 0x0, etc.
--0	            Number	    The Number negative zero, also including -0.0, -0x0, etc.
-0n	            BigInt	    The BigInt zero, also including 0x0n, etc. Note that there is no BigInt negative zero — the negation of 0n is 0n.
-""	            String	    Empty string value, also including '' and ``.
-document.all	Object	    The only falsy object in JavaScript is the built-in document.all.
+// function checkAge(age) {
+//     if (age < 18) {
+//         return "Child"
+//     } else {
+//         return "Adult"
+//     }
+// }
 
-----------------------------------------------------------------
-? Truthy
-----------------------------------------------------------------
-All values are truthy except false values.
+// console.log("Ålderskontroll")
+// console.log(checkAge(10))
+// console.log(checkAge(22))
+
+let fruits = ["🍎 äpple", "🍌 banan", "🥭 mango", "🥝 kiwi", "🍊 apelsin"]
+
+console.log("Fruits: ", fruits)
+
+console.log("Fruits length: ", fruits.length)
+
+fruits.push("🍍 ananas")
+
+console.log("Fruits: ", fruits)
+
+console.log("Fruits length: ", fruits.length)
+
+console.log("Last fruit is: ", fruits.at(-1))
+
+fruits.pop()
+
+console.log("Last fruit is: ", fruits.at(-1))
+
+console.log("Finns 🍌 banan i listan?: ", fruits.includes("🍌 banan"))
+console.log("Finns 🫐 blåbär i listan?: ", fruits.includes("🫐 blåbär"))
+
+console.log("🥝 kiwi har platsen: ", fruits.indexOf("🥝 kiwi"))
+
+fruits.unshift("🫐 blåbär")
+
+console.log("Finns 🫐 blåbär i listan?: ", fruits.includes("🫐 blåbär"))
+console.log("🫐 blåbär har platsen: ", fruits.indexOf("🫐 blåbär"))
+
+fruits.shift()
+console.log("Finns 🫐 blåbär i listan?: ", fruits.includes("🫐 blåbär"))
+
+const someFruits = fruits.slice(2, 4)
+
+console.log(someFruits)
+
+console.log(fruits.join(", 😋"))
+
+/*
+==============================
+ARRAYMETODER – FÖRMIDDAG
+==============================
+
+🟢 GRUNDER
+
+length
+- Antal element i arrayen
+- Syntax: array.length
+
+at()
+- Hämtar element på index (kan använda -1 för sista)
+- Syntax: array.at(index)
+
+push()
+- Lägger till i slutet
+- Syntax: array.push(value)
+
+pop()
+- Tar bort sista elementet
+- Syntax: array.pop()
+
+shift()
+- Tar bort första elementet
+- Syntax: array.shift()
+
+unshift()
+- Lägger till i början
+- Syntax: array.unshift(value)
+
+includes()
+- Kollar om värde finns (true/false)
+- Syntax: array.includes(value)
+
+indexOf()
+- Returnerar index för värde (eller -1)
+- Syntax: array.indexOf(value)
+
+join()
+- Gör om array till sträng
+- Syntax: array.join(separator)
+
+slice()
+- Skapar kopia av del av array (ändrar inte original)
+- Syntax: array.slice(start, end)
 */
 
-const matte = 1 + "7"
-
-if (matte) {
-    console.log(matte)
-    console.log(typeof matte)
-    console.log("Detta värdet är truthy ✅")
-} else {
-    console.log(matte)
-    console.log(typeof matte)
-    console.log("Detta värdet är falsy ❌")
-}
-
-/*  && → första falsy, annars sista */
-
-/*  || → första truthy, annars sista */
-
-/*  ?? tar nästa värde bara om vänster sida är null eller undefined */
-
-/*  ! → vänder till motsatt boolean */
-
 /*
-? Functions
+🔹 push()
+
+👉 Lägger till i slutet av arrayen
+
+
+🔹 pop()
+
+👉 Tar bort från slutet av arrayen
+
+🔹 unshift()
+
+👉 Lägger till i början av arrayen
+
+
+🔹 shift()
+
+👉 Tar bort från början av arrayen
 */
-
-console.log("Hej Ahmed!")
-console.log("Hej Lisa!")
-console.log("Hej Stina!")
-
-function basicFunction() {
-    console.log("Jag är en funktion 🔥")
-}
-
-basicFunction()
-basicFunction()
-basicFunction()
-
-//Paramenter = tar emot ett argument
-
-function greet(name) {
-    console.log(`Hej ${name}!`)
-}
-
-greet("Ahmed")
-greet("Lisa")
-greet("Johan ⚡️")
-greet(true)
-greet(42)
-
-//arrow-functions (modern)
-const arrowFunction = () => console.log("Hej från arrow 🏹")
-
-arrowFunction()
-
-// Block-scope
-let globalVariable = "Jag är global 🌏"
-
-function testScope() {
-    let localVariable = "Jag är lokal 📦"
-    console.log(globalVariable)
-    console.log(localVariable)
-}
-
-testScope()
-
-console.log(globalVariable)
-// console.log(localVarible)
-
-// Hoisting 🏗️
-
-hoisted()
-
-function hoisted() {
-    console.log("Jag är hoistad! 🏗️ 🔥")
-}
-
-// notHosited()
-
-const notHosited = function () {
-    console.log("Jag är inte hoistad! 🏗️ ❌")
-}
-
-notHosited()
-
-//RETURN
-
-const arrowReturn = (a, b) => {
-    return a + b
-}
-
-const answer = arrowReturn(100, 9)
-
-console.log(answer)
-
-
-// 🏗️ Hoisting const, let, var
-const johansConst = "const"
-
-// console.log(johansLet)
-
-let johansLet = "let"
-
-johansVar = "johan hositade var 🏗️"
-
-console.log(johansVar)
-
-var johansVar = "var"
-
-console.log(johansVar)
-
-
