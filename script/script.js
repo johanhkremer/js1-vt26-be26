@@ -16,6 +16,12 @@ console.log("Fruits: ", fruits)
 
 console.log("Fruits length: ", fruits.length)
 
+/*
+🔹 push()
+
+👉 Lägger till i slutet av arrayen
+*/
+
 fruits.push("🍍 ananas")
 
 console.log("Fruits: ", fruits)
@@ -23,6 +29,12 @@ console.log("Fruits: ", fruits)
 console.log("Fruits length: ", fruits.length)
 
 console.log("Last fruit is: ", fruits.at(-1))
+
+/*
+🔹 pop()
+
+👉 Tar bort från slutet av arrayen
+*/
 
 fruits.pop()
 
@@ -33,10 +45,22 @@ console.log("Finns 🫐 blåbär i listan?: ", fruits.includes("🫐 blåbär"))
 
 console.log("🥝 kiwi har platsen: ", fruits.indexOf("🥝 kiwi"))
 
+/*
+🔹 unshift()
+
+👉 Lägger till i början av arrayen
+*/
+
 fruits.unshift("🫐 blåbär")
 
 console.log("Finns 🫐 blåbär i listan?: ", fruits.includes("🫐 blåbär"))
 console.log("🫐 blåbär har platsen: ", fruits.indexOf("🫐 blåbär"))
+
+/*
+🔹 shift()
+
+👉 Tar bort från början av arrayen
+*/
 
 fruits.shift()
 console.log("Finns 🫐 blåbär i listan?: ", fruits.includes("🫐 blåbär"))
