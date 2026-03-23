@@ -10,7 +10,7 @@
 // console.log(checkAge(10))
 // console.log(checkAge(22))
 
-let fruits = ["🍎 äpple", "🍌 banan", "🥭 mango", "🥝 kiwi", "🍊 apelsin"]
+const fruits = ["🍎 äpple", "🍌 banan", "🥭 mango", "🥝 kiwi", "🍊 apelsin"]
 
 console.log("Fruits: ", fruits)
 
