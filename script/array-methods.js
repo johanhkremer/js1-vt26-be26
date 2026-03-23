@@ -69,7 +69,7 @@ console.log("🔌", electronics)
 
 const findProduct = products.find(product => product.id === 7)
 
-console.log("📱", findProduct)
+console.log("🔍", findProduct)
 
 //Promta products för att hitta ett specifikt produkt-id
 const promtFindProduct = prompt("Skriv produkt-id")
@@ -78,7 +78,7 @@ const productNumber = parseInt(promtFindProduct)
 
 const foundProduct = products.find(product => product.id === productNumber)
 
-console.log(foundProduct)
+console.log("🔍 Promtad produkt:", foundProduct)
 
 /*
 ==============================

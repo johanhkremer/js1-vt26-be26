@@ -5,12 +5,11 @@
 //         return "Adult"
 //     }
 // }
-
 // console.log("Ålderskontroll")
 // console.log(checkAge(10))
 // console.log(checkAge(22))
 
-const fruits = ["🍎 äpple", "🍌 banan", "🥭 mango", "🥝 kiwi", "🍊 apelsin"]
+let fruits = ["🍎 äpple", "🍌 banan", "🥭 mango", "🥝 kiwi", "🍊 apelsin"]
 
 console.log("Fruits: ", fruits)
 
