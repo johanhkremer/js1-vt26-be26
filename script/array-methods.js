@@ -59,11 +59,7 @@ const products = [
 ]
 
 //Skapa en ny array med endast "electronics"
-const electronics = products.filter((product) => {
-    if (product.category === "electronics") {
-        return product
-    }
-})
+const electronics = products.filter(product => product.category === "electronics")
 
 console.log("🔌", electronics)
 
