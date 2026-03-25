@@ -25,11 +25,11 @@ button.addEventListener("click", () => {
 
 // })
 
-const colors = ["red", "green", "blue", "lilac"]
+const colors = ["red", "green", "blue", "violet"]
 let index = 0
 
 colorButton.addEventListener("click", () => {
-    colorBox.classList.remove("red", "green", "blue", "lilac")
+    colorBox.classList.remove("red", "green", "blue", "violet")
 
     index++
 
