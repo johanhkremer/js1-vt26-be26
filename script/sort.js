@@ -66,16 +66,17 @@ console.log(sortedNumbers)
 // 5. Sortera objekt på ett numeriskt värde
 const students = [
     { id: 1, name: "Alice", age: 23, active: true },
-    { id: 2, name: "Bob", age: 19, active: false },
-    { id: 3, name: "Charlie", age: 25, active: true },
-    { id: 4, name: "Diana", age: 28, active: true },
-    { id: 5, name: "Elias", age: 17, active: false },
-    { id: 6, name: "Åke", age: 32, active: false },
-    { id: 6, name: "Örjan", age: 32, active: false },
+    { id: 2, name: "Åke", age: 32, active: false },
+    { id: 3, name: "Bob", age: 19, active: false },
+    { id: 4, name: "Charlie", age: 25, active: true },
+    { id: 5, name: "Örjan", age: 32, active: false },
+    { id: 6, name: "Diana", age: 28, active: true },
+    { id: 7, name: "Elias", age: 17, active: false },
 ]
 
 const studentsByAge = students.toSorted((a, b) => {
-    return a.age - b.age
+    //Hur får vi Åke & Örjan på rätt plats?
+    return a.name - b.name
 })
 
 console.log(studentsByAge)
