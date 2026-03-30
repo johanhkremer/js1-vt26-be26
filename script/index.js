@@ -1,43 +1,42 @@
-const button = document.getElementById("button")
-const countText = document.getElementById("countText")
-const colorButton = document.getElementById("colorButton")
-const colorBox = document.getElementById("colorBox")
+const todoForm = document.getElementById("todoForm")
+const todoInput = document.getElementById("todoInput")
+const todoList = document.getElementById("todoList")
 
-let count = 0
+todoForm.addEventListener("submit", (event) => {
+    event.preventDefault()
 
-button.addEventListener("click", () => {
-    count++
-    console.log(count)
-    countText.textContent = `Antal klick: ${count}`
-})
+    const text = todoInput.value
 
-// colorButton.addEventListener("click", () => {
-//     if (colorBox.classList.contains("red")) {
-//         colorBox.classList.remove("red")
-//         colorBox.classList.add("blue")
-//     } else {
-//         colorBox.classList.remove("blue")
-//         colorBox.classList.add("red")
-//     }
+    console.log(text)
 
-//     // colorBox.classList.toggle("red")
-//     // colorBox.classList.toggle("blue")
+    /* List Item Text */
+    const todoLiText = document.createElement("span")
+    todoLiText.textContent = text
 
-// })
+    /* Buttons */
+    const buttonWrapper = document.createElement("div")
+    buttonWrapper.classList.add("d-flex", "gap-2")
 
-const colors = ["red", "green", "blue", "violet"]
-let index = 0
+    const buttonDelete = document.createElement("button")
+    buttonDelete.textContent = "x"
+    buttonDelete.classList.add("btn", "btn-danger", "btn-sm")
 
-colorButton.addEventListener("click", () => {
-    colorBox.classList.remove("red", "green", "blue", "violet")
+    buttonDelete.addEventListener("click", () => {
+        todoLi.remove()
+    })
 
-    index++
+    const buttonDone = document.createElement("button")
+    buttonDone.textContent = "Done"
+    buttonDone.classList.add("btn", "btn-success", "btn-sm")
 
-    if (index >= colors.length) {
-        index = 0
-    }
+    /* List item */
+    const todoLi = document.createElement("li")
+    todoLi.classList.add("list-group-item", "mt-3", "d-flex", "justify-content-between", "align-items-center")
 
-    colorBox.classList.add(colors[index])
-    console.log(colors[index])
-    console.log(index)
+    buttonWrapper.appendChild(buttonDelete)
+    buttonWrapper.appendChild(buttonDone)
+    todoLi.appendChild(todoLiText)
+    todoLi.appendChild(buttonWrapper)
+    todoList.appendChild(todoLi)
+
 })
