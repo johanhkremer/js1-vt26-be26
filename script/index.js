@@ -4,8 +4,13 @@ const todoList = document.getElementById("todoList")
 const todoInputHelp = document.getElementById("todoInputHelp")
 const todoListView = document.getElementById("todoListView")
 const todoDetailView = document.getElementById("todoDetailView")
+const numberOfTodos = document.getElementById("numberOfTodos")
 
+// Arrayen där alla todo-objekt sparas medan appen körs.
 let todos = []
+
+// Sparar id:t för den todo som just nu är vald.
+// Om värdet är `null` betyder det att ingen todo är vald och att listvyn ska visas.
 let selectedTodoId = null
 
 // Skapar ett nytt todo-objekt från texten användaren skriver in.
@@ -16,6 +21,22 @@ const createTodo = (text) => {
         text: text,
         done: false,
         createdAt: new Date().toISOString()
+    }
+}
+
+// Sparar hela todo-listan i webbläsarens localStorage.
+// Vi gör om arrayen till en textsträng med JSON så att den kan sparas mellan sidladdningar.
+const saveTodosToLocalStorage = () => {
+    localStorage.setItem("todos", JSON.stringify(todos))
+}
+
+// Läser in sparade todos från localStorage när appen startar.
+// Om det finns sparad data omvandlas den tillbaka till en vanlig JavaScript-array.
+const loadTodosFromLocalStorage = () => {
+    const storedTodos = localStorage.getItem("todos")
+
+    if (storedTodos) {
+        todos = JSON.parse(storedTodos)
     }
 }
 
@@ -34,6 +55,7 @@ const createTodoLi = (todo) => {
 
     todoLiText.addEventListener("click", () => {
         selectedTodoId = todo.id
+
         renderApp()
     })
 
@@ -47,6 +69,12 @@ const createTodoLi = (todo) => {
     todoLi.appendChild(todoLiText)
 
     return todoLi
+}
+
+// Visar hur många todos som finns just nu.
+// Texten uppdateras varje gång appen renderas om.
+const renderNumberOfTodos = () => {
+    numberOfTodos.textContent = todos.length
 }
 
 // Skapar kortet som visas i detaljvyn för en vald todo.
@@ -87,6 +115,7 @@ const createButtonDelete = (todo) => {
     buttonDelete.addEventListener("click", () => {
         todos = todos.filter((currentTodo) => currentTodo.id !== todo.id)
         selectedTodoId = null
+        saveTodosToLocalStorage()
         renderApp()
     })
 
@@ -102,7 +131,7 @@ const createButtonDone = (todo) => {
 
     buttonDone.addEventListener("click", () => {
         todo.done = !todo.done
-
+        saveTodosToLocalStorage()
         renderApp()
     })
 
@@ -184,6 +213,8 @@ const renderTodoDetailView = () => {
 // Bestämmer vilken vy som ska visas.
 // Om ingen todo är vald visas listan, annars visas detaljvyn.
 const renderApp = () => {
+    renderNumberOfTodos()
+
     if (selectedTodoId === null) {
         renderTodoListView()
     } else {
@@ -203,13 +234,17 @@ todoForm.addEventListener("submit", (event) => {
 
     todos.push(newTodo)
 
-    console.log(todos)
-
+    saveTodosToLocalStorage()
     renderApp()
 
     todoInput.value = ""
     todoInput.focus()
 })
+
+// När sidan laddas in hämtar vi först tidigare sparade todos
+// och ritar sedan upp appen med det aktuella innehållet.
+loadTodosFromLocalStorage()
+renderApp()
 
 /*
 ? event.preventDefault()
@@ -219,4 +254,3 @@ Eftersom vi vill hantera formuläret själva med JavaScript
 stoppar vi det vanliga beteendet med preventDefault().
 Annars hinner sidan laddas om innan vi kan jobba vidare med värdet.
 */
-
