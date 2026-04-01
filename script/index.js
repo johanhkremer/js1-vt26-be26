@@ -199,8 +199,6 @@ todoForm.addEventListener("submit", (event) => {
 
     const text = todoInput.value.trim()
 
-    // const todoLi = createLiElement(text)
-
     const newTodo = createTodo(text)
 
     todos.push(newTodo)
