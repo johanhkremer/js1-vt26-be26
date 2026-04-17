@@ -18,6 +18,7 @@ await = vänta på att något ska bli klart
 */
 
 const ramenContainer = document.getElementById("ramen")
+const todosContainer = document.getElementById("todos")
 
 //Create Promise
 const waitForRamen = () => {
@@ -53,7 +54,35 @@ const makeRamen = async () => {
     }
 }
 
-makeRamen()
+// makeRamen()
+//-----------------------------------------
+
+let todos
+
+const getTodos = async () => {
+    const response = await fetch("https://jsonplaceholder.typicode.com/todos/")
+
+    const data = await response.json()
+
+    console.log(data)
+
+    todos = data
+
+    renderTodos()
+}
+
+const renderTodos = () => {
+    const todosList = todos.map((todo) => {
+        return `<p>${todo.id} ${todo.title}</p>`
+    }).join("")
+
+    todosContainer.innerHTML = todosList
+}
+
+getTodos()
+
+
+//-----------------------------------------
 
 //Steps
 
@@ -101,4 +130,4 @@ const runSteps = async () => {
     console.log("Alla steg klara")
 }
 
-runSteps()
+// runSteps()
