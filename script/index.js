@@ -1,60 +1,124 @@
-/* Sync */
+/*
+Ett Promise är ett löfte om att ett värde kommer senare.
+- används när något tar tid, t.ex. API-anrop eller timers
+- först är Promise "pending"
+- sedan blir det antingen:
+  - "fulfilled" = lyckades
+  - "rejected" = misslyckades
 
-const coffee = "☕️"
+Man kan ta emot resultatet med .then()
+och hantera fel med .catch()
 
-console.log(coffee)
+Exempel:
+fetch(url)
+    .then((response) => response.json())
+    .then((data) => console.log(data))
+    .catch((error) => console.log(error))
 
-/* Aync */
+Kort sagt:
+Promise = ett framtida värde
+.then() = vad som ska hända om det lyckas
+.catch() = vad som ska hända om det blir fel
+*/
 
-let asyncCoffee
+//Promises 🤝
 
-function makeCoffee() {
-    console.log("Start making coffee")
+//Create promise
+function makeRamen() {
+    console.log("Trying to make ramen...")
 
-    setTimeout(() => {
-        asyncCoffee = "☕️"
-    }, 2000)
+    return new Promise(function (resolve, rejected) {
+        const hasNoodles = true
 
-    console.log("Your coffee is beeing made")
+        if (hasNoodles) {
+            setTimeout(() => {
+                resolve("🍜")
+            }, 2000)
+        } else {
+            rejected("🛑 has no noodles left!")
+        }
+    })
 }
 
-makeCoffee()
+function boilEgg() {
+    return new Promise(function (resolve, rejected) {
+        const hasEgg = false
 
-setTimeout(() => {
-    console.log(`Your ${asyncCoffee} is ready`)
-}, 2500);
-
-/* 💎 Pure functions och 💥 side effects */
-
-// Pure function = same input same output för given input
-
-function pureNumbers(a, b) {
-    return a + b
+        if (hasEgg) {
+            setTimeout(() => {
+                resolve("🥚")
+            }, 2000)
+        } else {
+            rejected("All the chickens are dead 🐓💀")
+        }
+    })
 }
 
-console.log(pureNumbers(1, 7))
+const ramenPromise = makeRamen()
 
-let impureNumber = 7
+console.log(ramenPromise)
 
-function impureFunction() {
-    console.log(impureNumber)
+function eatRamen() {
+    console.log("Let's eat ramen")
 }
 
-impureFunction()
-
-// Callback function
-
-const cookRamen = (eatRamen) => {
-    setTimeout(() => {
-        const ramen = "🍲"
-        eatRamen(ramen)
-    }, 4000)
+function onSuccess(data) {
+    console.log("We made:", data)
 }
 
-const eatRamen = (ramen) => {
-    console.log(`Eat ${ramen}`)
+function onError(error) {
+    console.log("We couldn't make ramen because:", error)
 }
 
-cookRamen(eatRamen)
+//Receive promise
+makeRamen()
+    .then(boilEgg)
+    .then(onSuccess)
+    .catch(onError)
+    .finally(eatRamen)
 
-console.log("Gör något medans ramen tillagas")
+//Steps
+
+const step1 = () => {
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            console.log("Steg 1 klart")
+            resolve()
+        }, 4000)
+    })
+}
+
+const step2 = () => {
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            console.log("Steg 2 klart")
+            resolve()
+        }, 2000)
+    })
+}
+
+const step3 = () => {
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            console.log("Steg 3 klart")
+            resolve()
+        }, 500)
+    })
+}
+
+const step4 = () => {
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            console.log("Steg 4 klart")
+            resolve()
+        }, 2000)
+    })
+}
+
+step1()
+    .then(step2)
+    .then(step3)
+    .then(step4)
+    .then(() => {
+        console.log("Alla steg klara")
+    })
