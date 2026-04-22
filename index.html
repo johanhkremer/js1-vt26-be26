@@ -5,21 +5,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles/index.css">
-    <title>JS1 - Promises</title>
+    <title>JS1 - Weather app</title>
 </head>
 
 <body class="container">
     <header>
-        <h1>Promises</h1>
-        <a href="await.html">Async/await</a>
-        <a href="fetch.html">Fetch</a>
+        <h1>Weather app</h1>
     </header>
 
     <main>
+        <form id="cityWeatherForm">
+            <label for="cityWeatherInput">Skriv in en stad</label>
+            <input type="text" id="cityWeatherInput" placeholder="Sök på en stad t.ex. Malmö">
+            <button type="submit">Hämta väder</button>
+        </form>
 
+        <div id="weatherCard">
+
+        </div>
     </main>
 
-    <script src="script/index.js"></script>
+    <script type="module" src="script/index.js"></script>
 </body>
 
 </html>

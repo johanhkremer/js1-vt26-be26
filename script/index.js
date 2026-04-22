@@ -1,124 +1,75 @@
-/*
-Ett Promise är ett löfte om att ett värde kommer senare.
-- används när något tar tid, t.ex. API-anrop eller timers
-- först är Promise "pending"
-- sedan blir det antingen:
-  - "fulfilled" = lyckades
-  - "rejected" = misslyckades
+import { OPEN_WEATHER_API_KEY } from "./config.js"
 
-Man kan ta emot resultatet med .then()
-och hantera fel med .catch()
+const cityWeatherForm = document.getElementById("cityWeatherForm")
+const cityWeatherInput = document.getElementById("cityWeatherInput")
+const weatherCard = document.getElementById("weatherCard")
 
-Exempel:
-fetch(url)
-    .then((response) => response.json())
-    .then((data) => console.log(data))
-    .catch((error) => console.log(error))
+const getWeather = async (city) => {
+    const [location] = await getCoordinates(city)
 
-Kort sagt:
-Promise = ett framtida värde
-.then() = vad som ska hända om det lyckas
-.catch() = vad som ska hända om det blir fel
-*/
+    if (!location) {
+        throw new Error("🏙️🛑 Kunde inte hitta platsen")
+    }
 
-//Promises 🤝
+    const { lat, lon } = location
 
-//Create promise
-function makeRamen() {
-    console.log("Trying to make ramen...")
+    const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${OPEN_WEATHER_API_KEY}&units=metric&lang=sv`)
 
-    return new Promise(function (resolve, rejected) {
-        const hasNoodles = true
+    if (!response.ok) {
+        throw new Error("☀️🛑 Kunde inte hämta väderdata")
+    }
 
-        if (hasNoodles) {
-            setTimeout(() => {
-                resolve("🍜")
-            }, 2000)
-        } else {
-            rejected("🛑 has no noodles left!")
-        }
-    })
+    const data = await response.json()
+
+    return data
 }
 
-function boilEgg() {
-    return new Promise(function (resolve, rejected) {
-        const hasEgg = false
+const getCoordinates = async (city) => {
+    const response = await fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${city},SE&limit=1&appid=${OPEN_WEATHER_API_KEY}`)
 
-        if (hasEgg) {
-            setTimeout(() => {
-                resolve("🥚")
-            }, 2000)
-        } else {
-            rejected("All the chickens are dead 🐓💀")
-        }
-    })
+    if (!response.ok) {
+        throw new Error("🌏🛑 Kunde inte hämta koordinater")
+    }
+
+    const data = await response.json()
+
+    return data
 }
 
-const ramenPromise = makeRamen()
+const renderWeatherCard = async (city) => {
+    try {
+        const weatherCity = await getWeather(city)
+        console.log(weatherCity)
 
-console.log(ramenPromise)
+        weatherCard.innerHTML = `
+    <h2>${weatherCity.name}</h2>
 
-function eatRamen() {
-    console.log("Let's eat ramen")
+    <img src="https://openweathermap.org/img/wn/${weatherCity.weather[0].icon}@2x.png"
+    alt="${weatherCity.weather[0].description}">
+    <p>Temperatur: ${weatherCity.main.temp}°C</p>
+    <p>Känns som: ${weatherCity.main.feels_like}°C</p>
+    <p>Väder: ${weatherCity.weather[0].description}</p>
+    <p>Luftfuktighet: ${weatherCity.main.humidity}%</p>
+    <p>Vind: ${weatherCity.wind.speed} m/s</p>
+    `
+        weatherCard.classList.add("weatherCard")
+
+    } catch (error) {
+        console.log("Something went wrong: ", error)
+        weatherCard.innerHTML = `
+        <p>Någontin gick fel: ${error.message}</p>
+        `
+        weatherCard.classList.add("red")
+    }
 }
 
-function onSuccess(data) {
-    console.log("We made:", data)
-}
+cityWeatherForm.addEventListener("submit", (event) => {
+    event.preventDefault()
 
-function onError(error) {
-    console.log("We couldn't make ramen because:", error)
-}
+    weatherCard.innerHTML = ""
+    weatherCard.classList.remove("red", "weatherCard")
 
-//Receive promise
-makeRamen()
-    .then(boilEgg)
-    .then(onSuccess)
-    .catch(onError)
-    .finally(eatRamen)
+    const city = cityWeatherInput.value.trim()
 
-//Steps
-
-const step1 = () => {
-    return new Promise((resolve) => {
-        setTimeout(() => {
-            console.log("Steg 1 klart")
-            resolve()
-        }, 4000)
-    })
-}
-
-const step2 = () => {
-    return new Promise((resolve) => {
-        setTimeout(() => {
-            console.log("Steg 2 klart")
-            resolve()
-        }, 2000)
-    })
-}
-
-const step3 = () => {
-    return new Promise((resolve) => {
-        setTimeout(() => {
-            console.log("Steg 3 klart")
-            resolve()
-        }, 500)
-    })
-}
-
-const step4 = () => {
-    return new Promise((resolve) => {
-        setTimeout(() => {
-            console.log("Steg 4 klart")
-            resolve()
-        }, 2000)
-    })
-}
-
-step1()
-    .then(step2)
-    .then(step3)
-    .then(step4)
-    .then(() => {
-        console.log("Alla steg klara")
-    })
+    renderWeatherCard(city)
+})
