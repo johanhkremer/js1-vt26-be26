@@ -5,19 +5,11 @@ const cityWeatherInput = document.getElementById("cityWeatherInput")
 const weatherContainer = document.getElementById("weatherContainer")
 const forecastContainer = document.getElementById("forecastContainer")
 
-const getCurrentWeather = async (city) => {
-    const [location] = await getCoordinates(city)
-
-    if (!location) {
-        throw new Error("🏙️🛑 Kunde inte hitta platsen")
-    }
-
-    const { lat, lon } = location
-
+const getCurrentWeather = async (lat, lon) => {
     const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${OPEN_WEATHER_API_KEY}&units=metric&lang=sv`)
 
     if (!response.ok) {
-        throw new Error("☀️🛑 Kunde inte hämta väderdata")
+        throw new Error("☀️🛑 Kunde inte hämta aktuell väderdata")
     }
 
     const data = await response.json()
@@ -25,12 +17,12 @@ const getCurrentWeather = async (city) => {
     return data
 }
 
-const getForecast = async (city) => {
-    const [location] = await getCoordinates(city)
-
-    const { lat, lon } = location
-
+const getForecast = async (lat, lon) => {
     const response = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${OPEN_WEATHER_API_KEY}&units=metric&lang=sv`)
+
+    if (!response.ok) {
+        throw new Error("☀️🛑 Kunde inte hämta väderprognos")
+    }
 
     const data = await response.json()
 
@@ -49,35 +41,35 @@ const getCoordinates = async (city) => {
     return data
 }
 
-const renderCurrentWeatherCard = async (city) => {
+const renderCurrentWeatherCard = async (lat, lon) => {
+    renderLoadstate(weatherContainer)
+
     try {
-        const weatherCity = await getCurrentWeather(city)
+        const weatherCity = await getCurrentWeather(lat, lon)
 
         weatherContainer.innerHTML = `
-            <div class="weatherCard">
+            <article class="weatherCard">
                 <h2>${weatherCity.name}</h2>
 
                 <img src="https://openweathermap.org/img/wn/${weatherCity.weather[0].icon}@2x.png"
                 alt="${weatherCity.weather[0].description}">
-                <p>Temperatur: ${weatherCity.main.temp}°C</p>
-                <p>Känns som: ${weatherCity.main.feels_like}°C</p>
+                <p>Temperatur: ${Math.round(weatherCity.main.temp)}°C</p>
+                <p>Känns som: ${Math.round(weatherCity.main.feels_like)}°C</p>
                 <p>Väder: ${weatherCity.weather[0].description}</p>
                 <p>Luftfuktighet: ${weatherCity.main.humidity}%</p>
                 <p>Vind: ${weatherCity.wind.speed} m/s</p>
-            </div>
+            </article>
     `
     } catch (error) {
-        console.log("Something went wrong: ", error)
-        weatherContainer.innerHTML = `
-        <p>Någontin gick fel: ${error.message}</p>
-        `
-        weatherContainer.classList.add("red")
+        renderError(error, weatherContainer)
     }
 }
 
-const renderForcastCards = async (city) => {
+const renderForcastCards = async (lat, lon) => {
+    renderLoadstate(forecastContainer)
+
     try {
-        const forecastData = await getForecast(city)
+        const forecastData = await getForecast(lat, lon)
 
         const dailyForecasts = forecastData.list.filter((forecast) => {
             return forecast.dt_txt.includes("12:00:00")
@@ -100,21 +92,39 @@ const renderForcastCards = async (city) => {
         }).join("")
 
         forecastContainer.innerHTML = forecastCards
-
     } catch (error) {
-        console.log("Something went wrong: ", error)
-        forecastContainer.innerHTML = `
-        <p>Någontin gick fel: ${error.message}</p>
-        `
-        forecastContainer.classList.add("red")
+        renderError(error, forecastContainer)
     }
 }
 
-const renderApp = (city) => {
-    //Coordinates
+const renderLoadstate = (container) => {
+    container.innerHTML = "<p class='blue'>Din data laddas</p>"
+}
 
-    renderCurrentWeatherCard(city)
-    renderForcastCards(city)
+const renderError = (error, container) => {
+    console.log("Something went wrong: ", error)
+    container.innerHTML = `
+        <p>Någontin gick fel: ${error.message}</p>
+        `
+    container.classList.add("red")
+}
+
+const renderApp = async (city) => {
+    try {
+        const [location] = await getCoordinates(city)
+
+        if (!location) {
+            throw new Error("🏙️🛑 Kunde inte hitta platsen")
+        }
+
+        const { lat, lon } = location
+
+        renderCurrentWeatherCard(lat, lon)
+        renderForcastCards(lat, lon)
+
+    } catch (error) {
+        renderError(error, forecastContainer)
+    }
 }
 
 cityWeatherForm.addEventListener("submit", (event) => {
@@ -122,6 +132,8 @@ cityWeatherForm.addEventListener("submit", (event) => {
 
     weatherContainer.innerHTML = ""
     weatherContainer.classList.remove("red", "weatherCard")
+    forecastContainer.innerHTML = ""
+    forecastContainer.classList.remove("red")
 
     const city = cityWeatherInput.value.trim()
 
