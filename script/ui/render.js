@@ -22,6 +22,7 @@ export const renderCurrentWeatherCard = async (lat, lon) => {
         const weatherCity = await getCurrentWeather(lat, lon)
 
         weatherContainer.innerHTML = `
+        <a href="weatherDetailPage.html?code=${weatherCity.name}">
             <article class="weatherCard">
                 <h2>${weatherCity.name}</h2>
                 <img src="https://openweathermap.org/img/wn/${weatherCity.weather[0].icon}@2x.png"
@@ -29,11 +30,14 @@ export const renderCurrentWeatherCard = async (lat, lon) => {
                 <p>Temperatur: ${Math.round(weatherCity.main.temp)}°C</p>
                 <p>Väder: ${weatherCity.weather[0].description}</p>
             </article>
+        </a>
     `
     } catch (error) {
         renderError(error, weatherContainer)
     }
 }
+
+//DetailedCard
 
 export const renderForcastCards = async (lat, lon) => {
     renderLoadstate(forecastContainer)
