@@ -1,12 +1,12 @@
 import { getCoordinates } from "./services/weatherService.js"
-import { renderError } from "./ui/render.js"
-import { renderCurrentWeatherCard } from "./ui/render.js"
+import { renderError } from "./ui/shared.js"
+import { renderCurrentWeatherCard } from "./ui/renderHomePage.js"
 
 const cityWeatherForm = document.getElementById("cityWeatherForm")
 const cityWeatherInput = document.getElementById("cityWeatherInput")
 const weatherContainer = document.getElementById("weatherContainer")
 
-const renderApp = async (city) => {
+const loadHomePage = async (city) => {
     try {
         const [location] = await getCoordinates(city)
 
@@ -31,5 +31,5 @@ cityWeatherForm.addEventListener("submit", (event) => {
 
     const city = cityWeatherInput.value.trim()
 
-    renderApp(city)
+    loadHomePage(city)
 })

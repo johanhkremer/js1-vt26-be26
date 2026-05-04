@@ -1,28 +1,16 @@
 import { getCurrentWeather, getForecast } from "../services/weatherService.js"
+import { renderLoadstate, renderError } from "./shared.js"
 
-const weatherContainer = document.getElementById("weatherContainer")
 const forecastContainer = document.getElementById("forecastContainer")
+const weatherDetailedContainer = document.getElementById("weatherDetailedContainer")
 
-const renderLoadstate = (container) => {
-    container.innerHTML = "<p class='blue'>Din data laddas</p>"
-}
-
-export const renderError = (error, container) => {
-    console.log("Something went wrong: ", error)
-    container.innerHTML = `
-        <p>Någontin gick fel: ${error.message}</p>
-        `
-    container.classList.add("red")
-}
-
-export const renderCurrentWeatherCard = async (lat, lon) => {
-    renderLoadstate(weatherContainer)
+export const renderCurrentDetailedWeatherCard = async (lat, lon) => {
+    renderLoadstate(weatherDetailedContainer)
 
     try {
         const weatherCity = await getCurrentWeather(lat, lon)
 
-        weatherContainer.innerHTML = `
-        <a href="weatherDetailPage.html?code=${weatherCity.name}">
+        weatherDetailedContainer.innerHTML = `
             <article class="weatherCard">
                 <h2>${weatherCity.name}</h2>
                 <img src="https://openweathermap.org/img/wn/${weatherCity.weather[0].icon}@2x.png"
@@ -30,14 +18,12 @@ export const renderCurrentWeatherCard = async (lat, lon) => {
                 <p>Temperatur: ${Math.round(weatherCity.main.temp)}°C</p>
                 <p>Väder: ${weatherCity.weather[0].description}</p>
             </article>
-        </a>
     `
+
     } catch (error) {
-        renderError(error, weatherContainer)
+        renderError(error, weatherDetailedContainer)
     }
 }
-
-//DetailedCard
 
 export const renderForcastCards = async (lat, lon) => {
     renderLoadstate(forecastContainer)

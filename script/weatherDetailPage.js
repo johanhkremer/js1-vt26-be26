@@ -1,5 +1,6 @@
 import { getCoordinates } from "./services/weatherService.js"
-import { renderCurrentWeatherCard, renderError, renderForcastCards } from "./ui/render.js"
+import { renderCurrentDetailedWeatherCard, renderForcastCards } from "./ui/renderDetailPage.js"
+import { renderError } from "./ui/shared.js"
 
 const weatherDetailedContainer = document.getElementById("weatherDetailedContainer")
 const forecastContainer = document.getElementById("forecastContainer")
@@ -14,14 +15,16 @@ const loadDetailedPage = async (city) => {
 
         const { lat, lon } = location
 
-        renderCurrentDetailedWeatherCard()
-        renderForcastCards()
+        renderCurrentDetailedWeatherCard(lat, lon)
+        renderForcastCards(lat, lon)
 
     } catch (error) {
         renderError(error, weatherDetailedContainer)
     }
 }
 
-// city = url params
+const params = new URLSearchParams(window.location.search)
+
+const city = params.get("code")
 
 loadDetailedPage(city)
