@@ -4,16 +4,15 @@ Syftet med den har branchen ar att eleverna ska repetera centrala JS-koncept gen
 
 Omraden som ovningen tranar:
 
-- DOM-referenser och felhantering
-- formulardata och anvandarinput
-- URL-parametrar mellan sidor
-- `fetch`, API-endpoints och datastrukturer fran svar
-- array-metoder och rendering till HTML
+- `async`/`await` och Promise-varden
+- URL-parametrar mellan startsida och detaljsida
+- `fetch` och ratt API-endpoint
+- att lasa fel i konsolen och folja dataflodet mellan moduler
 
 Rekommenderat upplagg:
 
 1. Testa startsidan med en giltig stad.
-2. Testa med tom input eller extra mellanslag.
-3. Klicka vidare till detaljsidan.
-4. Las fel i konsolen och jamfor med vilken data API:t faktiskt returnerar.
+2. Las fel i konsolen och identifiera vilken rad som kraschar forst.
+3. Fundera pa om vardet ar riktig data eller ett Promise som inte har awaitats.
+4. Klicka vidare till detaljsidan nar startsidan fungerar.
 5. Fixa en bugg i taget och testa igen.
