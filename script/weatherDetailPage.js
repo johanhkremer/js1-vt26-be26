@@ -7,7 +7,8 @@ const forecastContainer = document.getElementById("forecastContainer")
 
 const loadDetailedPage = async (city) => {
     try {
-        const [location] = getCoordinates(city)
+        // Buggen var samma async-problem som pa startsidan: getCoordinates maste awaitas.
+        const [location] = await getCoordinates(city)
 
         if (!location) {
             throw new Error("Kunde inte hämta detaljdata om staden")

@@ -8,7 +8,8 @@ export const renderCurrentDetailedWeatherCard = async (lat, lon) => {
     renderLoadstate(weatherDetailedContainer)
 
     try {
-        const weatherCity = getCurrentWeather(lat, lon)
+        // Buggen var att current weather-anropet saknade await, sa weatherCity blev ett Promise.
+        const weatherCity = await getCurrentWeather(lat, lon)
 
         weatherDetailedContainer.innerHTML = `
             <article class="weatherCard">
@@ -29,7 +30,8 @@ export const renderForcastCards = async (lat, lon) => {
     renderLoadstate(forecastContainer)
 
     try {
-        const forecastData = getForecast(lat, lon)
+        // Buggen var att forecast-anropet saknade await, sa forecastData.list fanns inte annu.
+        const forecastData = await getForecast(lat, lon)
 
         const dailyForecasts = forecastData.list.filter((forecast) => {
             return forecast.dt_txt.includes("12:00:00")

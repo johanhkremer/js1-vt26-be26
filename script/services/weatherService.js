@@ -15,7 +15,8 @@ export const getCurrentWeather = async (lat, lon) => {
 }
 
 export const getForecast = async (lat, lon) => {
-    const response = await fetch(`${BASE_URL}data/2.5/weather?lat=${lat}&lon=${lon}&appid=${OPEN_WEATHER_API_KEY}&units=metric&lang=sv`)
+    // Buggen var att prognosen hamtades fran current weather-endpointen i stallet for forecast-endpointen.
+    const response = await fetch(`${BASE_URL}data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${OPEN_WEATHER_API_KEY}&units=metric&lang=sv`)
 
     if (!response.ok) {
         throw new Error("☀️🛑 Kunde inte hämta väderprognos")

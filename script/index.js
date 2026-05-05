@@ -8,7 +8,8 @@ const weatherContainer = document.getElementById("weatherContainer")
 
 const loadHomePage = async (city) => {
     try {
-        const [location] = getCoordinates(city)
+        // Buggen var att getCoordinates returnerar ett Promise. Vi maste vanta pa svaret innan array-destructuring.
+        const [location] = await getCoordinates(city)
 
         if (!location) {
             throw new Error("🏙️🛑 Kunde inte hitta platsen")

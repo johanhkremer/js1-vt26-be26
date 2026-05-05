@@ -10,7 +10,8 @@ export const renderCurrentWeatherCard = async (lat, lon) => {
         const weatherCity = await getCurrentWeather(lat, lon)
 
         weatherContainer.innerHTML = `
-        <a href="weatherDetailPage.html?city=${weatherCity.name}">
+        <!-- Buggen var att lankens parameter hette city, men detaljsidan laser code. -->
+        <a href="weatherDetailPage.html?code=${weatherCity.name}">
             <article class="weatherCard">
                 <h2>${weatherCity.name}</h2>
                 <img src="https://openweathermap.org/img/wn/${weatherCity.weather[0].icon}@2x.png"
