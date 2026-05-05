@@ -7,7 +7,7 @@ const weatherDetailedContainer = document.getElementById("weatherDetailedContain
 export const renderCurrentDetailedWeatherCard = async (lat, lon) => {
     renderLoadstate(weatherDetailedContainer)
 
-    try {
+        try {
         const weatherCity = await getCurrentWeather(lat, lon)
 
         weatherDetailedContainer.innerHTML = `
@@ -15,7 +15,7 @@ export const renderCurrentDetailedWeatherCard = async (lat, lon) => {
                 <h2>${weatherCity.name}</h2>
                 <img src="https://openweathermap.org/img/wn/${weatherCity.weather[0].icon}@2x.png"
                 alt="${weatherCity.weather[0].description}">
-                <p>Temperatur: ${Math.round(weatherCity.main.temp)}°C</p>
+                <p>Temperatur: ${Math.round(weatherCity.main.feels_like)}°C</p>
                 <p>Väder: ${weatherCity.weather[0].description}</p>
             </article>
     `
@@ -51,7 +51,7 @@ export const renderForcastCards = async (lat, lon) => {
             `
         })
 
-        forecastContainer.innerHTML = forecastCards
+        weatherDetailedContainer.innerHTML = forecastCards
     } catch (error) {
         renderError(error, forecastContainer)
     }

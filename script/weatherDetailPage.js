@@ -19,7 +19,7 @@ const loadDetailedPage = async (city) => {
         renderForcastCards(lat, lon)
 
     } catch (error) {
-        renderError(error, weatherDetailedContainer)
+        renderError(error, forecastContainer)
     }
 }
 

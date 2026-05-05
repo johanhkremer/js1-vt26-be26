@@ -27,7 +27,7 @@ cityWeatherForm.addEventListener("submit", (event) => {
     event.preventDefault()
 
     weatherContainer.innerHTML = ""
-    weatherContainer.classList.remove("red", "weatherCard")
+    weatherContainer.classList.add("red", "weatherCard")
 
     const city = cityWeatherInput.value
 
