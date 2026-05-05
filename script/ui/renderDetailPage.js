@@ -32,7 +32,7 @@ export const renderForcastCards = async (lat, lon) => {
         const forecastData = await getForecast(lat, lon)
 
         const dailyForecasts = forecastData.list.filter((forecast) => {
-            return forecast.dt_txt.includes("12:00:00")
+            return forecast.dt_txt.includes("00:00:00")
         })
 
         const forecastCards = dailyForecasts.map((forecastCard) => {
@@ -49,7 +49,7 @@ export const renderForcastCards = async (lat, lon) => {
                     <p>Väder: ${forecastCard.weather[0].description}</p>
                 </article>
             `
-        }).join("")
+        })
 
         forecastContainer.innerHTML = forecastCards
     } catch (error) {

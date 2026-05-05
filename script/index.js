@@ -29,7 +29,7 @@ cityWeatherForm.addEventListener("submit", (event) => {
     weatherContainer.innerHTML = ""
     weatherContainer.classList.remove("red", "weatherCard")
 
-    const city = cityWeatherInput.value.trim()
+    const city = cityWeatherInput.value
 
     loadHomePage(city)
 })
