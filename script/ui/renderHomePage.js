@@ -16,7 +16,7 @@ export const renderCurrentWeatherCard = async (lat, lon) => {
                 <img src="https://openweathermap.org/img/wn/${weatherCity.weather[0].icon}@2x.png"
                 alt="${weatherCity.weather[0].description}">
                 <p>Temperatur: ${Math.round(weatherCity.main.temp)}°C</p>
-                <p>Väder: ${weatherCity.weather.description}</p>
+                <p>Väder: ${weatherCity.weather[0].description}</p>
             </article>
         </a>
     `

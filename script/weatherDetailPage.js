@@ -7,7 +7,7 @@ const forecastContainer = document.getElementById("forecastContainer")
 
 const loadDetailedPage = async (city) => {
     try {
-        const [location] = await getCoordinates(city)
+        const [location] = getCoordinates(city)
 
         if (!location) {
             throw new Error("Kunde inte hämta detaljdata om staden")
@@ -19,7 +19,7 @@ const loadDetailedPage = async (city) => {
         renderForcastCards(lat, lon)
 
     } catch (error) {
-        renderError(error, forecastContainer)
+        renderError(error, weatherDetailedContainer)
     }
 }
 

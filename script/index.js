@@ -8,7 +8,7 @@ const weatherContainer = document.getElementById("weatherContainer")
 
 const loadHomePage = async (city) => {
     try {
-        const [location] = await getCoordinates(city)
+        const [location] = getCoordinates(city)
 
         if (!location) {
             throw new Error("🏙️🛑 Kunde inte hitta platsen")
@@ -27,9 +27,9 @@ cityWeatherForm.addEventListener("submit", (event) => {
     event.preventDefault()
 
     weatherContainer.innerHTML = ""
-    weatherContainer.classList.add("red", "weatherCard")
+    weatherContainer.classList.remove("red", "weatherCard")
 
-    const city = cityWeatherInput.value
+    const city = cityWeatherInput.value.trim()
 
     loadHomePage(city)
 })
