@@ -1,1 +1,4 @@
-config.js
+node_modules/
+dist/
+script/config.ts
+script/config.js

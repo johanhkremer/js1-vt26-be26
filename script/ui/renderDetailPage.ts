@@ -1,11 +1,9 @@
 import { getCurrentWeather, getForecast } from "../services/weatherService.js"
-import { renderLoadstate, renderError } from "./shared.js"
+import type { ForecastItem } from "../types.js"
+import { renderLoadState, renderError } from "./shared.js"
 
-const forecastContainer = document.getElementById("forecastContainer")
-const weatherDetailedContainer = document.getElementById("weatherDetailedContainer")
-
-export const renderCurrentDetailedWeatherCard = async (lat, lon) => {
-    renderLoadstate(weatherDetailedContainer)
+export const renderCurrentDetailedWeatherCard = async (lat: number, lon: number, weatherDetailedContainer: HTMLElement): Promise<void> => {
+    renderLoadState(weatherDetailedContainer)
 
     try {
         const weatherCity = await getCurrentWeather(lat, lon)
@@ -25,17 +23,17 @@ export const renderCurrentDetailedWeatherCard = async (lat, lon) => {
     }
 }
 
-export const renderForcastCards = async (lat, lon) => {
-    renderLoadstate(forecastContainer)
+export const renderForecastCards = async (lat: number, lon: number, forecastContainer: HTMLElement): Promise<void> => {
+    renderLoadState(forecastContainer)
 
     try {
         const forecastData = await getForecast(lat, lon)
 
-        const dailyForecasts = forecastData.list.filter((forecast) => {
+        const dailyForecasts = forecastData.list.filter((forecast: ForecastItem) => {
             return forecast.dt_txt.includes("12:00:00")
         })
 
-        const forecastCards = dailyForecasts.map((forecastCard) => {
+        const forecastCards = dailyForecasts.map((forecastCard: ForecastItem) => {
             const date = forecastCard.dt_txt.split(" ")[0]
 
             return `

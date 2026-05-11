@@ -1,0 +1,1 @@
+export const OPEN_WEATHER_API_KEY = "DIN_API_NYCKEL_HAR"

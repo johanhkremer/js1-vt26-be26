@@ -1,10 +1,8 @@
 import { getCurrentWeather } from "../services/weatherService.js"
-import { renderLoadstate, renderError } from "./shared.js"
+import { renderLoadState, renderError } from "./shared.js"
 
-const weatherContainer = document.getElementById("weatherContainer")
-
-export const renderCurrentWeatherCard = async (lat, lon) => {
-    renderLoadstate(weatherContainer)
+export const renderCurrentWeatherCard = async (lat: number, lon: number, weatherContainer: HTMLElement): Promise<void> => {
+    renderLoadState(weatherContainer)
 
     try {
         const weatherCity = await getCurrentWeather(lat, lon)
